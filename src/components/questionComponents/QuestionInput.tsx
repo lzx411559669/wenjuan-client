@@ -19,7 +19,7 @@ const QuestionInput: React.FunctionComponent<IQuestionInputProps> = ({
           <label className="label">
             <span className="label-text text-base">{title}</span>
           </label>
-          <input type="text"  name={fe_id} placeholder={placeholder} className="input input-bordered" />
+          <input type="text"  name={fe_id} placeholder={placeholder} className="input input-bordered input-primary w-full max-w-xs" />
         </div>
       <div></div>
     </>

@@ -6,7 +6,7 @@ interface IQuestionRadioProps {
     title: string;
     options: Array<{
       value: string;
-      text: string;
+      label: string;
     }>;
     value: string;
     isVertical: string;
@@ -22,25 +22,27 @@ const QuestionRadio: React.FunctionComponent<IQuestionRadioProps> = ({
   return (
     <>
       <div>{title}</div>
-      <input type="radio"></input>
-      <ul>
+      <div className={isVertical ? "flex flex-col" : "flex"}>
         {options.map((opt) => {
-          const { value: val, text } = opt;
+          const { value: val, label } = opt;
           return (
-            <li key={val}>
+            <div key={val} className="flex items-center mt-2 mx-1">
               <label>
-                <input
-                  type="radio"
-                  name={fe_id}
-                  value={val}
-                  defaultChecked={val === value}
-                ></input>
-                {text}
+                <div className="flex">
+                  <input
+                    type="radio"
+                    name={fe_id}
+                    className="radio"
+                    value={val}
+                    defaultChecked={val === value}
+                  ></input>
+                  <p className="ml-4 mb-2 inline-block">{label}</p>
+                </div>
               </label>
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </>
   );
 };

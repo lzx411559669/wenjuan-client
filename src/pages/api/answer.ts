@@ -1,6 +1,8 @@
+import { get } from "@/services/ajax";
+import { postAnswer } from "@/services/answer";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -12,11 +14,18 @@ export default function handler(
     const answerInfo = getAnswerInfo(req.body)
     console.log(answerInfo)
     try {
-        
+        const resData = await postAnswer(answerInfo)
+        //如果提交失败
+        if (!resData.success) {
+            res.redirect("/error")
+        } else {
+            res.redirect('/success')
+        }
+
     } catch (error) {
         console.log(error)
     }
-   res.redirect("/success")
+    res.redirect("/success")
 }
 
 function getAnswerInfo(body: any) {
